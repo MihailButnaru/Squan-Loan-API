@@ -3,35 +3,19 @@
 from uuid import uuid1
 from django.conf import settings
 from django.db import models
-"""
-Customer model view
-"""
 
 class Customers(models.Model):
-    client_id = models.UUIDField(
-            primary_key=True, 
-            default=uuid1, 
-            editable=False, 
-            verbose_name=('clientId'))
-    firstname = models.TextField(
-            max_length=20, 
-            null=False, 
-            blank=False)
-    surname = models.TextField(
-            max_length=20, 
-            null=False, 
-            blank=False)
-    email = models.TextField(
-            max_length=20, 
-            null=False, 
-            blank=False)
-    phone = models.IntegerField(
-            null=False, 
-            blank=False)
-    date = models.DateTimeField(
-            auto_now_add=True,
-            verbose_name=('created')
-    )
+    """ Customer model """
+    firstname = models.TextField(max_length=20, null=False)
+    surname = models.TextField(max_length=20, null=False)
+    email = models.TextField(max_length=20, null=False)
+    phone = models.IntegerField()
+    dateAdded = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} {}'.format(self.firstname, self.surname)
 
     class Meta:
+        verbose_name = 'customer'
+        verbose_name_plural = 'customers'
         db_table = 'customers'
